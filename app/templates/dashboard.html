@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Waste Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #0f172a; /* navy-blue dark */
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .sub-title {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #2c3e50;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #38bdf8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        table th {
+            background: #334155;
+            color: #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .back-link:hover {
+            color: #93c5fd;
+        }
+
+        @media(max-width: 600px) {
+            .thumb {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📊 Smart Waste Dashboard</h1>
+        <p class="sub-title">Tracking waste classification & bin distribution</p>
+
+        <!-- TOP CARDS -->
+        <div class="grid">
+
+            <!-- BIN COUNTS -->
+            <div class="card">
+                <h3>Bin Distribution</h3>
+                <ul>
+                    {% for bin, cnt in bin_counts.items() %}
+                        <li><strong>{{ bin }}</strong>: {{ cnt }}</li>
+                    {% else %}
+                        <li>No data yet</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- CLASS COUNTS -->
+            <div class="card">
+                <h3>Class Predictions</h3>
+                <ul>
+                    {% for cls in classes %}
+                        <li>{{ cls }}: {{ class_counts.get(cls, 0) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Quick Info</h3>
+                <p>Dashboard auto-updates when new predictions come in. Logs are stored in <code>/data/logs.json</code>.</p>
+            </div>
+        </div>
+
+        <!-- RECENT PREDICTIONS TABLE -->
+        <h2 style="margin-top:20px;">Recent Predictions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Image</th>
+                    <th>Class</th>
+                    <th>Confidence</th>
+                    <th>Bin</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in recent %}
+                <tr>
+                    <td>{{ item.timestamp }}</td>
+
+                    <td>
+                        {% if item.filename %}
+                            <img src="{{ url_for('uploaded_file', filename=item.filename) }}" class="thumb">
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    <td>{{ item.pred_class }}</td>
+                    <td>{{ (item.prob * 100) | round(1) }}%</td>
+                    <td>{{ item.bin }}</td>
+                    <td>{{ item.source }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="6" style="text-align:center;">No predictions yet</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ url_for('index') }}" class="back-link">← Back to Classifier</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Waste Classifier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <p><a href="{{ url_for('dashboard') }}" style="color:#60a5fa;">View Dashboard →</a></p>
+
+    <h1>♻ Smart Waste Classifier</h1>
+    <p>Upload trash image or open camera live and detect category</p>
+
+    <div class="card">
+      <h2>Upload image</h2>
+      <form id="uploadForm">
+        <input type="file" id="fileInput" name="image" accept="image/*" />
+        <button type="submit">Predict</button>
+      </form>
+      <div id="uploadPreview"></div>
+    </div>
+
+    <div class="card">
+      <h2>Live Camera</h2>
+      <video id="video" autoplay playsinline></video>
+      <canvas id="canvas" style="display:none;"></canvas>
+      <div class="row">
+        <button id="startCam">Start Camera</button>
+        <button id="snap">Snap & Predict</button>
+        <button id="auto">Auto Predict</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Prediction Result</h2>
+      <div id="result">No prediction yet.</div>
+      <div id="probs"></div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
