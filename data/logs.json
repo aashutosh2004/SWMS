@@ -1,0 +1,47 @@
+[
+  {
+    "id": "3db58d214463469684f7c5478bb1b6fc",
+    "timestamp": "2025-11-17T09:07:35.869419Z",
+    "pred_class": "metal",
+    "prob": 0.8950358629226685,
+    "bin": "metal",
+    "source": "upload",
+    "filename": "2be8f6772d7e4ca9822b6831b1e0780f_Web-cover-38.jpg"
+  },
+  {
+    "id": "5acd160e3d544283bc3bfe76f409a53c",
+    "timestamp": "2025-11-17T08:29:32.805665Z",
+    "pred_class": "metal",
+    "prob": 0.8950358629226685,
+    "bin": "metal",
+    "source": "upload",
+    "filename": "c5867e62c31246fda15763d3955a00dc_Web-cover-38.jpg"
+  },
+  {
+    "id": "3a3649faaabf4d8fb52f7279c95dcc2e",
+    "timestamp": "2025-11-17T08:29:31.259810Z",
+    "pred_class": "metal",
+    "prob": 0.8950358629226685,
+    "bin": "metal",
+    "source": "upload",
+    "filename": "10f243cde1b64b78bc10328807de660e_Web-cover-38.jpg"
+  },
+  {
+    "id": "97e18d43e1c943f18eb048e2abb70069",
+    "timestamp": "2025-11-17T08:13:21.446448Z",
+    "pred_class": "metal",
+    "prob": 0.9173527359962463,
+    "bin": "metal",
+    "source": "upload",
+    "filename": "96e172e9fa844470bcff14bdc39df651_Screenshot 2025-11-17 134125.png"
+  },
+  {
+    "id": "3b1e42b3029941468f923658ec16f09a",
+    "timestamp": "2025-11-17T07:53:35.182744Z",
+    "pred_class": "metal",
+    "prob": 0.9025171399116516,
+    "bin": "metal",
+    "source": "upload",
+    "filename": "6caa9b45d3b9462484aa26bce673e80e_Screenshot 2025-11-12 160532.png"
+  }
+]
